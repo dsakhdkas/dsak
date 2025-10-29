@@ -3,93 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>留言区 - HDU-Lolita爱好站</title>
+    <title>留言查看 - HDU-Lolita爱好站</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 可选：给留言卡片微调样式 */
+        .message-card {
+            background: #fff;
+            border: 1px solid #f2cce3;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 15px auto;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+        .message-card strong {
+            color: #d84b8a;
+        }
+        .no-data {
+            text-align: center;
+            color: #999;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
     <!-- 顶部导航 -->
     <header>
-        <h1>留言区</h1>
+        <h1>留言查看</h1>
         <nav>
             <a href="index.html">首页</a>
-            <a href="sales.html">贩售信息</a>
-            <a href="message.html" class="active">留言区</a>
+            <a href="message.html">返回留言页</a>
         </nav>
     </header>
 
-    <!-- 主体内容 -->
     <main>
-        <h2 style="text-align:center; margin:20px 0;">欢迎留下你的意见或分享穿搭心得 ✨</h2>
-
-        <form id="messageForm">
-            <label>昵称：
-                <input type="text" name="username" required placeholder="请输入你的昵称">
-            </label><br><br>
-
-            <label>邮箱：
-                <input type="email" name="email" placeholder="可选填写">
-            </label><br><br>
-
-            <label>主题：
-                <select name="topic">
-                    <option value="suggestion">网站建议</option>
-                    <option value="share">穿搭分享</option>
-                    <option value="other">其他</option>
-                </select>
-            </label><br><br>
-
-            <label>留言内容：</label><br>
-            <textarea name="message" rows="5" cols="50" placeholder="请输入留言内容..." required></textarea><br><br>
-
-            <label>
-                <input type="checkbox" required> 我已阅读并同意隐私政策
-            </label><br><br>
-
-            <button type="submit">提交留言</button>
-        </form>
-
-        <!-- 新增：查看留言按钮 -->
-        <div style="text-align:center; margin-top:30px;">
-            <button onclick="window.location.href='message-list.html'" 
-                    style="background-color:#f7a9c4; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
-                💕 查看所有留言 💕
-            </button>
-        </div>
+        <h2 style="text-align:center; margin:20px 0;">💕 留言展示区 💕</h2>
+        <div id="messageContainer"></div>
     </main>
 
-    <!-- 页脚 -->
     <footer>
         <p>© 2025 HDU-Lolita爱好站 | 邮箱：hdu-lolita@xx.edu.cn</p>
     </footer>
 
-    <!-- JS：使用 localStorage 保存留言 -->
+    <!-- JS：从 localStorage 读取留言 -->
     <script>
-        document.getElementById("messageForm").addEventListener("submit", function(e) {
-            e.preventDefault(); // 阻止默认刷新
+        const container = document.getElementById("messageContainer");
+        const messages = JSON.parse(localStorage.getItem("messages") || "[]");
 
-            // 获取表单内容
-            const name = this.username.value.trim();
-            const email = this.email.value.trim();
-            const topic = this.topic.value;
-            const msg = this.message.value.trim();
-
-            // 生成留言对象
-            const newMessage = {
-                name,
-                email,
-                topic,
-                msg,
-                time: new Date().toLocaleString()
-            };
-
-            // 获取已有留言并保存
-            const existing = JSON.parse(localStorage.getItem("messages") || "[]");
-            existing.push(newMessage);
-            localStorage.setItem("messages", JSON.stringify(existing));
-
-            alert("留言已保存到本地浏览器 🌸");
-            this.reset(); // 清空表单
-        });
+        if (messages.length === 0) {
+            container.innerHTML = '<p class="no-data">暂无留言内容 🌸</p>';
+        } else {
+            // 反转数组，显示最新留言在上方
+            messages.reverse();
+            messages.forEach(m => {
+                const card = document.createElement("div");
+                card.className = "message-card";
+                card.innerHTML = `
+                    <p><strong>${m.name || "匿名"}</strong> (${m.topic})</p>
+                    <p>${m.msg}</p>
+                    <p style="font-size:13px; color:#888;">${m.time}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
     </script>
 </body>
 </html>
