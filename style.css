@@ -1,62 +1,63 @@
-/* ====== 全局基础设置 ====== */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ===== 全局基础设置 ===== */
 body {
-  font-family: "Microsoft YaHei", sans-serif;
+  font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
   background-color: #fff7fa;
   color: #5b4b5b;
   line-height: 1.6;
-  padding-bottom: 50px;
 }
 
-/* ====== 头部导航栏 ====== */
-header {
+/* ===== 导航栏（float布局） ===== */
+.header {
   background-color: #ffe6f0;
-  padding: 20px;
-  text-align: center;
+  padding: 15px;
   border-bottom: 2px solid #f5cce0;
+  overflow: hidden;
 }
 
-header h1 {
-  font-size: 26px;
+.logo {
+  float: left;
   color: #d84b8a;
-  margin-bottom: 10px;
-  font-family: "Times New Roman", serif;
+  font-family: 'Parisienne', cursive;
+  font-size: 26px;
 }
 
-nav a {
+nav ul {
+  list-style: none;
+  float: right;
+}
+
+nav ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+nav ul li a {
   text-decoration: none;
   color: #5b4b5b;
-  margin: 0 10px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: 0.3s;
 }
 
-nav a:hover {
+nav ul li a:hover {
   background-color: #fcd3e2;
   color: #d84b8a;
 }
 
-nav a.active {
+nav ul li a.active {
   background-color: #d84b8a;
-  color: #fff;
+  color: white;
 }
 
-/* ====== Banner 区 ====== */
+/* ===== Banner ===== */
 .banner {
   position: relative;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .banner img {
   width: 100%;
-  max-height: 300px;
+  max-height: 320px;
   object-fit: cover;
   border-bottom: 3px solid #f9d6e8;
 }
@@ -67,138 +68,103 @@ nav a.active {
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 240, 245, 0.8);
-  padding: 10px 20px;
+  padding: 10px 25px;
   border-radius: 12px;
   color: #d84b8a;
   font-size: 20px;
-  font-weight: bold;
+  font-family: 'Parisienne', cursive;
 }
 
-/* ====== 内容区模块 ====== */
-.section {
-  margin: 40px auto;
-  width: 90%;
-  max-width: 900px;
-  text-align: center;
-}
-
-.section h3 {
+/* ===== Section 标题伪元素装饰 ===== */
+.section h3::before {
+  content: "❀ ";
   color: #d84b8a;
-  border-bottom: 2px solid #f7c4da;
-  display: inline-block;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+/* ===== 卡片 flex布局 ===== */
+.sales-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .card {
-  display: inline-block;
-  background-color: #fff;
+  background-color: white;
   border: 1px solid #f2cce3;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 10px;
+  border-radius: 12px;
   width: 220px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s;
+  padding: 12px;
+  text-align: center;
+  transition: 0.3s;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
   width: 100%;
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-/* ====== 表格样式（列表页用） ====== */
-table {
-  border-collapse: collapse;
-  margin: 20px auto;
+/* ===== 穿搭分享 Grid布局 ===== */
+.outfits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
   width: 90%;
   max-width: 900px;
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
+  margin: 20px auto;
 }
 
-th, td {
+.outfit-item {
+  background-color: #fff;
   border: 1px solid #f2cce3;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.outfit-item:hover {
+  transform: scale(1.02);
+}
+
+.outfit-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.outfit-item p {
   padding: 10px;
   text-align: center;
 }
 
-th {
-  background-color: #ffe6f0;
+/* ===== 伪类 first-letter ===== */
+p:first-letter {
+  font-size: 18px;
   color: #d84b8a;
   font-weight: bold;
 }
 
-tr:nth-child(even) {
-  background-color: #fff9fb;
-}
-
-/* ====== 表单样式（留言页） ====== */
-form {
-  background-color: #fff;
-  width: 90%;
-  max-width: 600px;
-  margin: 30px auto;
-  border: 1px solid #f5cce0;
-  border-radius: 15px;
-  padding: 20px 30px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-  text-align: left;
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #7c6a7b;
-}
-
-input[type="text"],
-input[type="email"],
-textarea,
-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #f2cce3;
-  border-radius: 8px;
-  margin-top: 5px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  background-color: #d84b8a;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #b4376f;
-}
-
-/* ====== 页脚 ====== */
+/* ===== 页脚 ===== */
 footer {
   background-color: #ffe6f0;
   color: #5b4b5b;
   text-align: center;
   padding: 15px;
   border-top: 2px solid #f5cce0;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
+  margin-top: 30px;
+}
+
+footer p::before {
+  content: "\f004"; /* 爱心图标 */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #d84b8a;
+  margin-right: 5px;
 }

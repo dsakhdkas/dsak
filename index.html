@@ -4,47 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HDU-Lolita爱好站</title>
+
+    <!-- ① 引入 Normalize.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <!-- ② 引入字体与图标库 -->
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ③ 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 顶部导航 -->
+    <!-- 顶部导航栏 -->
     <header class="header">
-        <h1>HDU-Lolita爱好站</h1>
+        <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
         <nav>
-            <a href="index.html">首页</a>
-            <a href="sales.html">贩售信息</a>
-            <a href="sales-detail.html">详情页</a>
-            <a href="message.html">留言区</a>
+            <ul>
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="sales.html">贩售信息</a></li>
+                <li><a href="message.html">留言区</a></li>
+            </ul>
         </nav>
     </header>
 
-    <!-- Banner 区 -->
+    <!-- Banner 区（使用绝对定位的文字） -->
     <section class="banner">
         <img src="images/banner.jpg" alt="Lolita文化Banner">
+        <h2>欢迎来到杭电Lolita服饰文化站 🎀</h2>
     </section>
 
-    <!-- 模块：最新发售信息 -->
-    <section class="section">
-        <h3>✨ 最新贩售信息</h3>
-        <div class="card">
-            <img src="images/sample-dress.jpg" alt="示例图">
-            <p><strong>Starlight Waltz JSK</strong></p>
-            <p>品牌：Baby, The Stars Shine Bright</p>
-            <p>状态：定金中</p>
-            <a href="sales-detail.html">查看详情</a>
+    <!-- 模块1：贩售信息 -->
+    <section class="section sales-section">
+        <h3><i class="fa-solid fa-star"></i> 最新贩售信息</h3>
+        <div class="sales-container">
+            <div class="card">
+                <img src="images/sample-dress.jpg" alt="示例图">
+                <p><strong>Starlight Waltz JSK</strong></p>
+                <p>品牌：Baby, The Stars Shine Bright</p>
+                <p>状态：定金中</p>
+            </div>
+            <div class="card">
+                <img src="images/outfit1.jpg" alt="示例图">
+                <p><strong>Dreamy Dessert JSK</strong></p>
+                <p>品牌：Angelic Pretty</p>
+                <p>状态：已结束</p>
+            </div>
         </div>
     </section>
 
-    <!-- 模块：穿搭分享 -->
-    <section class="section">
-        <h3>🍰 穿搭分享</h3>
-        <img src="images/outfit1.jpg" alt="穿搭示例" width="200">
-        <p>@Yue 的 Dreamy Dessert JSK</p>
+    <!-- 模块2：穿搭分享（使用 Grid 布局） -->
+    <section class="section outfits-section">
+        <h3><i class="fa-solid fa-heart"></i> 穿搭分享</h3>
+        <div class="outfits-grid">
+            <div class="outfit-item"><img src="images/outfit1.jpg" alt=""><p>@Yue · Dreamy Dessert</p></div>
+            <div class="outfit-item"><img src="images/outfit2.jpg" alt=""><p>@Luna · Classic Melody</p></div>
+            <div class="outfit-item"><img src="images/outfit3.jpg" alt=""><p>@Mina · Rose Ballet</p></div>
+        </div>
     </section>
 
     <!-- 页脚 -->
     <footer>
-        <p>© 2025 HDU-Lolita爱好站 | 邮箱：hdu-lolita@xx.edu.cn</p>
+        <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
     </footer>
 </body>
 </html>

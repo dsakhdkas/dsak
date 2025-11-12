@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>留言区 - HDU-Lolita爱好站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,13 +49,6 @@
             <button type="submit">提交留言</button>
         </form>
 
-        <!-- 新增：查看留言按钮 -->
-        <div style="text-align:center; margin-top:30px;">
-            <button onclick="window.location.href='message-list.html'" 
-                    style="background-color:#f7a9c4; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">
-                💕 查看所有留言 💕
-            </button>
-        </div>
     </main>
 
     <!-- 页脚 -->
@@ -62,34 +56,5 @@
         <p>© 2025 HDU-Lolita爱好站 | 邮箱：hdu-lolita@xx.edu.cn</p>
     </footer>
 
-    <!-- JS：使用 localStorage 保存留言 -->
-    <script>
-        document.getElementById("messageForm").addEventListener("submit", function(e) {
-            e.preventDefault(); // 阻止默认刷新
-
-            // 获取表单内容
-            const name = this.username.value.trim();
-            const email = this.email.value.trim();
-            const topic = this.topic.value;
-            const msg = this.message.value.trim();
-
-            // 生成留言对象
-            const newMessage = {
-                name,
-                email,
-                topic,
-                msg,
-                time: new Date().toLocaleString()
-            };
-
-            // 获取已有留言并保存
-            const existing = JSON.parse(localStorage.getItem("messages") || "[]");
-            existing.push(newMessage);
-            localStorage.setItem("messages", JSON.stringify(existing));
-
-            alert("留言已保存到本地浏览器 🌸");
-            this.reset(); // 清空表单
-        });
-    </script>
 </body>
 </html>
