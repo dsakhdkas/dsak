@@ -6,6 +6,10 @@ body {
   line-height: 1.6;
 }
 
+h3 {
+  text-align: center;
+}
+
 /* ===== 导航栏（float布局） ===== */
 .header {
   background-color: #ffe6f0;
