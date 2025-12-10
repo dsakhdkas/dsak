@@ -9,7 +9,6 @@ h3 {
   text-align: center;
 }
 
-/* ===== 导航栏（float布局） ===== */
 .header {
   background-color: #ffe6f0;
   padding: 15px;
@@ -52,7 +51,6 @@ nav ul li a.active {
   color: white;
 }
 
-/* ===== Banner ===== */
 .banner {
   position: relative;
   text-align: center;
@@ -112,7 +110,6 @@ nav ul li a.active {
   margin-bottom: 8px;
 }
 
-/* ===== 穿搭分享 Grid布局 ===== */
 .outfits-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
