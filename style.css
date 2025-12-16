@@ -332,7 +332,7 @@ h3 {
 /* 穿搭分享区域的 Grid 容器，居中横向排列 */
 .outfits-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   gap: 20px;
   justify-items: center;
   justify-content: center;
