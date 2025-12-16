@@ -25,6 +25,10 @@ body{
   color: var(--text);
 }
 
+h3 { 
+  text-align: center; 
+}
+
 a{ color: inherit; }
 
 .muted{ color: var(--muted); }
@@ -145,6 +149,7 @@ h3 {
 }
 
 .banner h1,
+.banner h2,
 .banner p{
   position: absolute;
   left: 50%;
@@ -156,6 +161,12 @@ h3 {
   top: 40%;
   font-size: 38px;
   font-family: 'Parisienne', cursive;
+}
+
+.banner h2{
+  top: 40%;
+  font-size: 28px;
+  color: var(--text);
 }
 
 .banner p{
@@ -316,6 +327,16 @@ h3 {
   height: 200px;
   border-radius: 12px;
   object-fit: cover;
+}
+
+/* 穿搭分享区域的 Grid 容器，居中横向排列 */
+.outfits-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  justify-content: center;
+  margin-top: 18px;
 }
 
 /* =========================
