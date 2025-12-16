@@ -4,137 +4,198 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>留言区 - HDU-Lolita爱好站</title>
-
-    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- 顶部导航 -->
-<header class="header">
-    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
-    <nav>
-        <ul>
-            <li><a href="index.html">首页</a></li>
-            <li><a href="about.html">关于Lolita</a></li>
-            <li><a href="sales.html">贩售信息</a></li>
-            <li><a href="message.html" class="active">留言区</a></li>
-            <li><span id="authSlot"></span></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>留言区</h1>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="sales.html">贩售信息</a>
+            <a href="message.html" class="active">留言区</a>
+        </nav>
+    </header>
 
-<section class="page-hero">
-    <div class="page-hero__inner">
-        <h1><i class="fa-solid fa-feather-pointed"></i> 留言区</h1>
-        <p>欢迎留下你的意见，或分享穿搭心得与种草清单 ✨</p>
-    </div>
-</section>
+    <main>
+        <h2 style="text-align:center; margin:20px 0;">欢迎留下你的意见或分享穿搭心得 ✨</h2>
 
-<main class="container">
+        <form id="messageForm" novalidate>
+            <label>昵称：
+                <input type="text" name="username" required placeholder="请输入你的昵称">
+                    <div class="field-error" data-for="username"></div>
+            </label><br><br>
 
-    <section class="grid-2">
-        <!-- 表单 -->
-        <div class="panel">
-            <h2 class="panel__title"><i class="fa-solid fa-pen-to-square"></i> 写一条留言</h2>
-            <p class="panel__desc">我们会认真阅读每一条反馈。带 <span class="req">*</span> 为必填项。</p>
+            <label>邮箱：
+                <input type="email" name="email" placeholder="可选填写">
+                    <div class="field-error" data-for="email"></div>
+            </label><br><br>
 
-            <form id="messageForm" class="form">
-                <div class="form__row">
-                    <label class="form__label">昵称 <span class="req">*</span></label>
-                    <input class="input" type="text" name="username" required placeholder="请输入你的昵称">
-                </div>
+            <label>主题：
+                <select name="topic">
+                    <div class="field-error" data-for="topic"></div>
+                    <option value="suggestion">网站建议</option>
+                    <option value="share">穿搭分享</option>
+                    <option value="other">其他</option>
+                </select>
+            </label><br><br>
 
-                <div class="form__row">
-                    <label class="form__label">邮箱</label>
-                    <input class="input" type="email" name="email" placeholder="可选填写（用于回复）">
-                </div>
+            <label>留言内容：</label><br>
+            <textarea name="message" rows="5" cols="50" placeholder="请输入留言内容..." required></textarea>
+                    <div class="field-error" data-for="message"></div><br><br>
 
-                <div class="form__row">
-                    <label class="form__label">主题</label>
-                    <select class="input" name="topic">
-                        <option value="suggestion">网站建议</option>
-                        <option value="share">穿搭分享</option>
-                        <option value="buy">贩售咨询</option>
-                        <option value="other">其他</option>
-                    </select>
-                </div>
+            <label>
+                <input type="checkbox" required> 我已阅读并同意隐私政策
+            </label><br><br>
 
-                <div class="form__row">
-                    <label class="form__label">留言内容 <span class="req">*</span></label>
-                    <textarea class="input" name="message" rows="6" placeholder="比如：想看哪些风格科普 / 这条裙子搭配什么鞋更好看..." required></textarea>
-                </div>
+            <button type="submit">提交留言</button>
+        </form>
 
-                <label class="checkbox">
-                    <input type="checkbox" required>
-                    <span>我已阅读并同意隐私政策</span>
-                </label>
+    </main>
 
-                <button class="btn btn--primary" type="submit">
-                    <i class="fa-solid fa-paper-plane"></i> 提交留言
-                </button>
+    <!-- 页脚 -->
+    <footer>
+        <p>© 2025 HDU-Lolita爱好站 | 邮箱：hdu-lolita@xx.edu.cn</p>
+    </footer>
 
-                <p class="form__hint">
-                    <i class="fa-solid fa-lock"></i> 本站为静态展示页面，提交按钮仅做界面演示。
-                </p>
-            </form>
-        </div>
 
-        <!-- 侧边信息 + 最近留言 -->
-        <aside class="stack">
-            <div class="panel panel--soft">
-                <h3 class="panel__title"><i class="fa-solid fa-lightbulb"></i> 留言小贴士</h3>
-                <ul class="tips">
-                    <li>分享穿搭时可以写：风格、主裙、配件与心情。</li>
-                    <li>想要更快获得回复，建议填写邮箱。</li>
-                    <li>文明交流，友好讨论，一起变得更可爱～</li>
-                </ul>
-            </div>
+<script>
+(function(){
+  const form = document.getElementById('messageForm');
+  if(!form) return;
 
-            <div class="panel">
-                <h3 class="panel__title"><i class="fa-solid fa-comments"></i> 最近留言</h3>
+  const alertBox = document.getElementById('formAlert');
 
-                <div class="comment">
-                    <div class="comment__meta">
-                        <span class="badge">穿搭分享</span>
-                        <span class="comment__name">@Luna</span>
-                        <span class="comment__time">2025/12/01</span>
-                    </div>
-                    <p class="comment__text">这周入了经典风 JSK，搭配奶白衬衫和棕色玛丽珍，拍照超级出片！</p>
-                </div>
+  const fields = {
+    username: form.querySelector('[name="username"]'),
+    email: form.querySelector('[name="email"]'),
+    topic: form.querySelector('[name="topic"]'),
+    message: form.querySelector('[name="message"]'),
+    privacy: form.querySelector('input[type="checkbox"]')
+  };
 
-                <div class="comment">
-                    <div class="comment__meta">
-                        <span class="badge badge--rose">网站建议</span>
-                        <span class="comment__name">@Mina</span>
-                        <span class="comment__time">2025/11/18</span>
-                    </div>
-                    <p class="comment__text">希望贩售信息页能加“状态标签”，一眼看出定金中/已结束～</p>
-                </div>
+  const rules = {
+    username: (v) => {
+      const s = (v || '').trim();
+      if(!s) return '请输入昵称。';
+      if(s.length < 2) return '昵称至少 2 个字符。';
+      if(s.length > 16) return '昵称最多 16 个字符。';
+      // 可选：限制特殊字符
+      if(!/^[\u4e00-\u9fa5A-Za-z0-9_·\-\s]+$/.test(s)) return '昵称仅支持中文/英文/数字/下划线/短横线。';
+      return '';
+    },
+    email: (v) => {
+      const s = (v || '').trim();
+      if(!s) return ''; // 可选项
+      // 轻量邮箱校验（不追求 100% RFC）
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)) return '邮箱格式不正确。';
+      if(s.length > 60) return '邮箱太长了。';
+      return '';
+    },
+    topic: (v) => {
+      const s = (v || '').trim();
+      if(!s) return '请选择主题。';
+      return '';
+    },
+    message: (v) => {
+      const s = (v || '').trim();
+      if(!s) return '请输入留言内容。';
+      if(s.length < 8) return '留言内容至少 8 个字符。';
+      if(s.length > 300) return '留言内容最多 300 个字符。';
+      return '';
+    },
+    privacy: (checked) => checked ? '' : '请勾选同意隐私政策。'
+  };
 
-                <div class="comment">
-                    <div class="comment__meta">
-                        <span class="badge badge--gray">其他</span>
-                        <span class="comment__name">@Yue</span>
-                        <span class="comment__time">2025/11/02</span>
-                    </div>
-                    <p class="comment__text">想看一个“Lolita 入门搭配清单”小教程！</p>
-                </div>
-            </div>
-        </aside>
-    </section>
+  function errEl(key){
+    return form.querySelector('.field-error[data-for="'+key+'"]');
+  }
+  function setError(key, msg){
+    const el = errEl(key);
+    if(!el) return;
+    el.textContent = msg || '';
+    el.style.display = msg ? 'block' : 'none';
+    // 给输入框加错误态
+    const input = fields[key];
+    if(input && input.classList){
+      input.classList.toggle('input--error', !!msg);
+    }
+  }
 
-</main>
+  function setAlert(msg, type){
+    if(!alertBox) return;
+    alertBox.textContent = msg || '';
+    alertBox.className = 'form-alert' + (type ? (' form-alert--'+type) : '');
+    alertBox.style.display = msg ? 'block' : 'none';
+  }
 
-<footer>
-    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
-</footer>
+  function validateOne(key){
+    if(key === 'privacy'){
+      const msg = rules.privacy(!!fields.privacy.checked);
+      setError('privacy', msg);
+      return !msg;
+    }
+    const input = fields[key];
+    const msg = rules[key](input ? input.value : '');
+    setError(key, msg);
+    return !msg;
+  }
 
-<script src="auth.js"></script>
+  function validateAll(){
+    const keys = Object.keys(rules);
+    let ok = true;
+    keys.forEach(k => { if(!validateOne(k)) ok = false; });
+    return ok;
+  }
+
+  // 实时校验
+  ['input','blur','change'].forEach(evt => {
+    form.addEventListener(evt, (e) => {
+      const t = e.target;
+      if(!t || !t.name) return;
+      if(rules[t.name]) validateOne(t.name);
+    }, true);
+  });
+
+  if(fields.privacy){
+    fields.privacy.addEventListener('change', () => validateOne('privacy'));
+  }
+
+  form.addEventListener('submit', (e) => {
+    setAlert('', '');
+    const ok = validateAll();
+    if(!ok){
+      e.preventDefault();
+      setAlert('还有内容需要完善：请检查红色提示项。', 'error');
+      // 滚动到第一个错误
+      const first = form.querySelector('.input--error') || form.querySelector('.field-error[style*="block"]');
+      if(first && first.scrollIntoView) first.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    // 静态站演示：阻止真正提交，并给出成功提示
+    e.preventDefault();
+    setAlert('提交成功（演示）：你的留言已通过客户端校验。', 'success');
+
+    // 可选：把留言暂存到 localStorage
+    try{
+      const payload = {
+        username: (fields.username.value||'').trim(),
+        email: (fields.email.value||'').trim(),
+        topic: (fields.topic.value||'').trim(),
+        message: (fields.message.value||'').trim(),
+        time: new Date().toISOString()
+      };
+      localStorage.setItem('demo_last_message', JSON.stringify(payload));
+    }catch(_){}
+
+    // 清空表单
+    form.reset();
+    ['username','email','topic','message','privacy'].forEach(k => setError(k,''));
+  });
+})();
+</script>
 
 </body>
 </html>

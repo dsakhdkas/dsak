@@ -1,39 +1,36 @@
-// 商品数据（静态站点本地数据）
-// 你可以继续往下添加更多商品；id 需要唯一
 window.PRODUCTS = [
   {
     id: "starlight-waltz",
-    name: "Starlight Waltz JSK",
-    brand: "Baby, The Stars Shine Bright",
+    name: "奥尔奇物商店 OP",
+    brand: "仲夏物语",
     style: "Classic",
     status: "deposit", // deposit | ended | coming
-    price: 899,
+    price: 499,
     deposit: "2025/10/20 - 2025/10/25",
     finalPay: "2025/11/05",
     image: "images/sample-dress.jpg",
-    desc: "以星光与华尔兹为主题的梦幻系列，使用银丝织纹与细腻蕾丝，体现典雅气质。",
+    desc: "当猫头鹰的羽翼轻抚过夜色，散落的星光便在此化为真实的藏品",
     tips: [
-      "衬衫：奶白/象牙白蕾丝领口更显古典。",
       "鞋子：棕色玛丽珍或黑色圆头鞋都很稳。",
-      "头饰：同色系小头花/发带可以增强整体感。"
+      "头饰：同色系女巫帽增强整体感。"
     ],
     recommend: ["classic-melody", "rose-ballet"]
   },
   {
     id: "dreamy-dessert",
-    name: "Dreamy Dessert JSK",
-    brand: "Angelic Pretty",
+    name: "晚餐会 JSK",
+    brand: "玻璃纸之夜",
     style: "Sweet",
     status: "ended",
-    price: 1099,
+    price: 399,
     deposit: "2025/03/01 - 2025/03/05",
     finalPay: "2025/03/18",
     image: "images/outfit3.jpg",
-    desc: "甜品主题印花与糖果色系，适合搭配蓬蓬衬裙与彩色袜，甜度拉满。",
+    desc: "长桌上餐品准备完毕，晚餐会即将开始",
     tips: [
-      "衬衫：泡泡袖+小立领会更甜。",
+      "衬衫：生产色点纱内搭",
       "鞋子：粉/白色圆头鞋或蝴蝶结高跟都可。",
-      "配件：糖果色发饰、草莓耳饰点题。"
+      "配件：破碎之心项链。"
     ],
     recommend: ["starlight-waltz", "rose-ballet"]
   },
