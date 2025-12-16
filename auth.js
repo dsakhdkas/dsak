@@ -1,4 +1,3 @@
-<script>
 (function () {
   const KEY = "lolita_username";
 
@@ -30,4 +29,3 @@
 
   document.addEventListener("DOMContentLoaded", render);
 })();
-</script>
