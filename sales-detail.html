@@ -4,31 +4,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Starlight Waltz JSK - 详情页</title>
+
+    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>商品详情</h1>
-        <nav>
-            <a href="index.html">首页</a>
-            <a href="sales.html">返回列表</a>
-        </nav>
-    </header>
 
-    <main>
-        <h2>Starlight Waltz JSK</h2>
-        <img src="images/sample-dress.jpg" alt="Starlight Waltz JSK" width="250">
-        <p><strong>品牌：</strong>Baby, The Stars Shine Bright</p>
-        <p><strong>风格：</strong>Classic</p>
-        <p><strong>定金时间：</strong>2025/10/20 - 2025/10/25</p>
-        <p><strong>尾款时间：</strong>2025/11/05</p>
-        <p><strong>价格：</strong>￥899</p>
-        <p><strong>简介：</strong>以星光与华尔兹为主题的梦幻系列，使用银丝织纹与细腻蕾丝，体现典雅气质。</p>
-    </main>
+<header class="header">
+    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="sales.html" class="active">贩售信息</a></li>
+            <li><a href="message.html">留言区</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <footer>
-        <p>© 2025 HDU-Lolita爱好站</p>
-    </footer>
+<section class="page-hero">
+    <div class="page-hero__inner">
+        <h1><i class="fa-solid fa-gem"></i> 商品详情</h1>
+        <p>主裙信息、时间节点与小科普，一页看全～</p>
+    </div>
+</section>
+
+<main class="container">
+    <section class="detail">
+        <div class="detail__media">
+            <img src="images/sample-dress.jpg" alt="Starlight Waltz JSK">
+            <div class="detail__badges">
+                <span class="status status--deposit">定金中</span>
+                <span class="badge">Classic</span>
+            </div>
+        </div>
+
+        <div class="detail__info panel">
+            <div class="detail__head">
+                <h2 class="detail__title">Starlight Waltz JSK</h2>
+                <div class="detail__price">￥899</div>
+            </div>
+
+            <div class="kv">
+                <div class="kv__row">
+                    <div class="kv__k"><i class="fa-solid fa-store"></i> 品牌</div>
+                    <div class="kv__v">Baby, The Stars Shine Bright</div>
+                </div>
+                <div class="kv__row">
+                    <div class="kv__k"><i class="fa-solid fa-palette"></i> 风格</div>
+                    <div class="kv__v">Classic</div>
+                </div>
+                <div class="kv__row">
+                    <div class="kv__k"><i class="fa-solid fa-calendar-days"></i> 定金时间</div>
+                    <div class="kv__v">2025/10/20 - 2025/10/25</div>
+                </div>
+                <div class="kv__row">
+                    <div class="kv__k"><i class="fa-solid fa-clock"></i> 尾款时间</div>
+                    <div class="kv__v">2025/11/05</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <h3 class="subhead"><i class="fa-solid fa-feather"></i> 简介</h3>
+            <p class="muted" style="margin-top:8px;">
+                以星光与华尔兹为主题的梦幻系列，使用银丝织纹与细腻蕾丝，体现典雅气质。
+            </p>
+
+            <h3 class="subhead"><i class="fa-solid fa-shirt"></i> 搭配建议</h3>
+            <ul class="tips" style="margin-top:8px;">
+                <li>衬衫：奶白/象牙白蕾丝领口更显古典。</li>
+                <li>鞋子：棕色玛丽珍或黑色圆头鞋都很稳。</li>
+                <li>头饰：同色系小头花/发带可以增强整体感。</li>
+            </ul>
+
+            <div class="detail__actions">
+                <a class="btn btn--ghost" href="sales.html"><i class="fa-solid fa-arrow-left"></i> 返回列表</a>
+                <a class="btn btn--primary" href="message.html"><i class="fa-solid fa-comment-dots"></i> 咨询/留言</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h3><i class="fa-solid fa-heart"></i> 你可能也喜欢</h3>
+        <div class="sales-container">
+            <div class="card">
+                <img src="images/outfit2.jpg" alt="示例图">
+                <p><strong>Classic Melody OP</strong></p>
+                <p>品牌：示例品牌</p>
+                <p><span class="status status--coming">预告</span></p>
+                <a class="btn btn--primary btn--sm" href="sales.html">去看看</a>
+            </div>
+
+            <div class="card">
+                <img src="images/outfit1.jpg" alt="示例图">
+                <p><strong>Rose Ballet SK</strong></p>
+                <p>品牌：示例品牌</p>
+                <p><span class="status status--ended">已结束</span></p>
+                <a class="btn btn--primary btn--sm" href="sales.html">去看看</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+</footer>
+
 </body>
 </html>

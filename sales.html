@@ -4,48 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>贩售信息 - HDU-Lolita爱好站</title>
+
+    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>贩售信息</h1>
-        <nav>
-            <a href="index.html">首页</a>
-            <a href="sales.html" class="active">贩售信息</a>
-            <a href="message.html">留言</a>
-        </nav>
-    </header>
 
-    <main>
-        <h2>品牌新品列表</h2>
-        <table border="1" cellpadding="8">
-            <tr>
-                <th>系列名称</th>
-                <th>品牌</th>
-                <th>定金时间</th>
-                <th>状态</th>
-                <th>详情</th>
-            </tr>
-            <tr>
-                <td>Starlight Waltz JSK</td>
-                <td>Baby, The Stars Shine Bright</td>
-                <td>2025/10/20 - 2025/10/25</td>
-                <td>定金中</td>
-                <td><a href="sales-detail.html">查看</a></td>
-            </tr>
-            <tr>
-                <td>Dreamy Dessert JSK</td>
-                <td>Angelic Pretty</td>
-                <td>2025/03/01 - 2025/03/05</td>
-                <td>已结束</td>
-                <td><a href="sales-detail.html">查看</a></td>
-            </tr>
-        </table>
-    </main>
+<header class="header">
+    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于Lolita</a></li>
+            <li><a href="sales.html" class="active">贩售信息</a></li>
+            <li><a href="message.html">留言区</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <footer>
-        <p>© 2025 HDU-Lolita爱好站</p>
-    </footer>
+<section class="page-hero">
+    <div class="page-hero__inner">
+        <h1><i class="fa-solid fa-tags"></i> 贩售信息</h1>
+        <p>整理品牌新品定金/尾款时间，方便你不再错过心动款 🎀</p>
+    </div>
+</section>
+
+<main class="container">
+    <section class="panel">
+        <div class="toolbar">
+            <div class="toolbar__left">
+                <h2 class="panel__title" style="margin:0;"><i class="fa-solid fa-list"></i> 品牌新品列表</h2>
+                <span class="muted">（静态展示，可按你的数据继续扩展）</span>
+            </div>
+
+            <div class="toolbar__right">
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="search__input" type="text" placeholder="搜索：系列 / 品牌 / 状态（示意）">
+                </div>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>系列名称</th>
+                    <th>品牌</th>
+                    <th>定金时间</th>
+                    <th>状态</th>
+                    <th style="width:120px;">详情</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="cell-title">Starlight Waltz JSK</div>
+                        <div class="cell-sub muted">Classic · 银丝织纹 · 蕾丝</div>
+                    </td>
+                    <td>Baby, The Stars Shine Bright</td>
+                    <td>2025/10/20 - 2025/10/25</td>
+                    <td><span class="status status--deposit">定金中</span></td>
+                    <td><a class="btn btn--ghost btn--sm" href="sales-detail.html"><i class="fa-solid fa-arrow-right"></i> 查看</a></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="cell-title">Dreamy Dessert JSK</div>
+                        <div class="cell-sub muted">Sweet · 甜品主题 · 糖果色</div>
+                    </td>
+                    <td>Angelic Pretty</td>
+                    <td>2025/03/01 - 2025/03/05</td>
+                    <td><span class="status status--ended">已结束</span></td>
+                    <td><a class="btn btn--ghost btn--sm" href="sales-detail.html"><i class="fa-solid fa-arrow-right"></i> 查看</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="note">
+            <i class="fa-solid fa-circle-info"></i>
+            提示：你可以把表格数据替换成更多条目；也可以将“查看”链接改成不同的详情页文件。
+        </div>
+    </section>
+
+    <section class="section">
+        <h3><i class="fa-solid fa-sparkles"></i> 近期推荐</h3>
+        <div class="sales-container">
+            <div class="card">
+                <img src="images/sample-dress.jpg" alt="示例图">
+                <p><strong>Starlight Waltz JSK</strong></p>
+                <p>品牌：BTSSB</p>
+                <p><span class="status status--deposit">定金中</span></p>
+                <a class="btn btn--primary btn--sm" href="sales-detail.html">查看详情</a>
+            </div>
+
+            <div class="card">
+                <img src="images/outfit3.jpg" alt="示例图">
+                <p><strong>晚餐会 JSK</strong></p>
+                <p>品牌：玻璃纸之夜</p>
+                <p><span class="status status--deposit">定金中</span></p>
+                <a class="btn btn--primary btn--sm" href="sales-detail.html">查看详情</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+</footer>
+
 </body>
 </html>

@@ -4,56 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>留言区 - HDU-Lolita爱好站</title>
+
+    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>留言区</h1>
-        <nav>
-            <a href="index.html">首页</a>
-            <a href="sales.html">贩售信息</a>
-            <a href="message.html" class="active">留言区</a>
-        </nav>
-    </header>
+<!-- 顶部导航 -->
+<header class="header">
+    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
+    <nav>
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于Lolita</a></li>
+            <li><a href="sales.html">贩售信息</a></li>
+            <li><a href="message.html" class="active">留言区</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main>
-        <h2 style="text-align:center; margin:20px 0;">欢迎留下你的意见或分享穿搭心得 ✨</h2>
+<section class="page-hero">
+    <div class="page-hero__inner">
+        <h1><i class="fa-solid fa-feather-pointed"></i> 留言区</h1>
+        <p>欢迎留下你的意见，或分享穿搭心得与种草清单 ✨</p>
+    </div>
+</section>
 
-        <form id="messageForm">
-            <label>昵称：
-                <input type="text" name="username" required placeholder="请输入你的昵称">
-            </label><br><br>
+<main class="container">
 
-            <label>邮箱：
-                <input type="email" name="email" placeholder="可选填写">
-            </label><br><br>
+    <section class="grid-2">
+        <!-- 表单 -->
+        <div class="panel">
+            <h2 class="panel__title"><i class="fa-solid fa-pen-to-square"></i> 写一条留言</h2>
+            <p class="panel__desc">我们会认真阅读每一条反馈。带 <span class="req">*</span> 为必填项。</p>
 
-            <label>主题：
-                <select name="topic">
-                    <option value="suggestion">网站建议</option>
-                    <option value="share">穿搭分享</option>
-                    <option value="other">其他</option>
-                </select>
-            </label><br><br>
+            <form id="messageForm" class="form">
+                <div class="form__row">
+                    <label class="form__label">昵称 <span class="req">*</span></label>
+                    <input class="input" type="text" name="username" required placeholder="请输入你的昵称">
+                </div>
 
-            <label>留言内容：</label><br>
-            <textarea name="message" rows="5" cols="50" placeholder="请输入留言内容..." required></textarea><br><br>
+                <div class="form__row">
+                    <label class="form__label">邮箱</label>
+                    <input class="input" type="email" name="email" placeholder="可选填写（用于回复）">
+                </div>
 
-            <label>
-                <input type="checkbox" required> 我已阅读并同意隐私政策
-            </label><br><br>
+                <div class="form__row">
+                    <label class="form__label">主题</label>
+                    <select class="input" name="topic">
+                        <option value="suggestion">网站建议</option>
+                        <option value="share">穿搭分享</option>
+                        <option value="buy">贩售咨询</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
 
-            <button type="submit">提交留言</button>
-        </form>
+                <div class="form__row">
+                    <label class="form__label">留言内容 <span class="req">*</span></label>
+                    <textarea class="input" name="message" rows="6" placeholder="比如：想看哪些风格科普 / 这条裙子搭配什么鞋更好看..." required></textarea>
+                </div>
 
-    </main>
+                <label class="checkbox">
+                    <input type="checkbox" required>
+                    <span>我已阅读并同意隐私政策</span>
+                </label>
 
-    <!-- 页脚 -->
-    <footer>
-        <p>© 2025 HDU-Lolita爱好站 | 邮箱：hdu-lolita@xx.edu.cn</p>
-    </footer>
+                <button class="btn btn--primary" type="submit">
+                    <i class="fa-solid fa-paper-plane"></i> 提交留言
+                </button>
+
+                <p class="form__hint">
+                    <i class="fa-solid fa-lock"></i> 本站为静态展示页面，提交按钮仅做界面演示。
+                </p>
+            </form>
+        </div>
+
+        <!-- 侧边信息 + 最近留言 -->
+        <aside class="stack">
+            <div class="panel panel--soft">
+                <h3 class="panel__title"><i class="fa-solid fa-lightbulb"></i> 留言小贴士</h3>
+                <ul class="tips">
+                    <li>分享穿搭时可以写：风格、主裙、配件与心情。</li>
+                    <li>想要更快获得回复，建议填写邮箱。</li>
+                    <li>文明交流，友好讨论，一起变得更可爱～</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h3 class="panel__title"><i class="fa-solid fa-comments"></i> 最近留言</h3>
+
+                <div class="comment">
+                    <div class="comment__meta">
+                        <span class="badge">穿搭分享</span>
+                        <span class="comment__name">@Luna</span>
+                        <span class="comment__time">2025/12/01</span>
+                    </div>
+                    <p class="comment__text">这周入了经典风 JSK，搭配奶白衬衫和棕色玛丽珍，拍照超级出片！</p>
+                </div>
+
+                <div class="comment">
+                    <div class="comment__meta">
+                        <span class="badge badge--rose">网站建议</span>
+                        <span class="comment__name">@Mina</span>
+                        <span class="comment__time">2025/11/18</span>
+                    </div>
+                    <p class="comment__text">希望贩售信息页能加“状态标签”，一眼看出定金中/已结束～</p>
+                </div>
+
+                <div class="comment">
+                    <div class="comment__meta">
+                        <span class="badge badge--gray">其他</span>
+                        <span class="comment__name">@Yue</span>
+                        <span class="comment__time">2025/11/02</span>
+                    </div>
+                    <p class="comment__text">想看一个“Lolita 入门搭配清单”小教程！</p>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+</footer>
 
 </body>
 </html>
