@@ -275,6 +275,7 @@ nav ul li a.active{
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 15px;
+  justify-content: center;
 }
 
 .card,

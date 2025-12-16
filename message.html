@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>留言区 - HDU-Lolita爱好站</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css?v=1">
 </head>
-<body>
 
+<body>
 <header class="header">
   <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
   <nav>
@@ -18,7 +18,7 @@
       <li><a href="index.html">首页</a></li>
       <li><a href="about.html">关于Lolita</a></li>
       <li><a href="sales.html">贩售信息</a></li>
-      <li><a href="message.html" class="active">留言区</a></li>
+      <li><a class="active" href="message.html">留言区</a></li>
     </ul>
   </nav>
 </header>
@@ -26,75 +26,77 @@
 <section class="page-hero">
   <div class="page-hero__inner">
     <h1><i class="fa-solid fa-feather-pointed"></i> 留言区</h1>
-    <p>欢迎留下你的意见，或分享穿搭心得与种草清单 ✨</p>
+    <p>欢迎留下你的意见或分享穿搭心得 ✨</p>
   </div>
 </section>
 
 <main class="container">
   <section class="panel">
-    <h2 class="panel__title" style="text-align:center;margin:0 0 8px;">
-      写一条留言
-    </h2>
+    <h2 class="panel__title" style="text-align:center;margin:0 0 8px;">写一条留言</h2>
     <p class="panel__desc" style="text-align:center;">
-      带 <span class="req">*</span> 为必填项（提交为静态演示，会进行客户端校验）。
+      使用浏览器内置校验（required/minlength/type=email）
     </p>
 
-    <form id="messageForm" class="form" novalidate>
-      <div id="formAlert" class="form-alert" role="alert" aria-live="polite"></div>
-
+    <!-- 不加 novalidate：让浏览器自己提示 -->
+    <form id="messageForm">
       <div class="form__row">
         <label class="form__label">昵称 <span class="req">*</span></label>
-        <input class="input" type="text" name="username" required placeholder="请输入你的昵称">
-        <div class="field-error" data-for="username"></div>
+        <input class="input" name="username" required minlength="2" maxlength="16"
+               placeholder="请输入昵称">
       </div>
 
       <div class="form__row">
-        <label class="form__label">邮箱</label>
-        <input class="input" type="email" name="email" placeholder="可选填写（用于回复）">
-        <div class="field-error" data-for="email"></div>
+        <label class="form__label">邮箱（可选）</label>
+        <input class="input" name="email" type="email" placeholder="xxx@xx.com">
       </div>
 
       <div class="form__row">
-        <label class="form__label">主题</label>
-        <select class="input" name="topic">
+        <label class="form__label">主题 <span class="req">*</span></label>
+        <select class="input" name="topic" required>
+          <option value="">请选择主题</option>
           <option value="suggestion">网站建议</option>
           <option value="share">穿搭分享</option>
           <option value="buy">贩售咨询</option>
           <option value="other">其他</option>
         </select>
-        <div class="field-error" data-for="topic"></div>
       </div>
 
       <div class="form__row">
         <label class="form__label">留言内容 <span class="req">*</span></label>
-        <textarea class="input" name="message" rows="6" placeholder="比如：想看哪些风格科普 / 这条裙子搭配什么鞋更好看..." required></textarea>
-        <div class="field-error" data-for="message"></div>
+        <textarea class="input" name="message" required minlength="8" maxlength="300" rows="6"
+                  placeholder="至少 8 个字，最多 300 字"></textarea>
       </div>
 
       <label class="checkbox">
         <input type="checkbox" required>
         <span>我已阅读并同意隐私政策</span>
       </label>
-      <div class="field-error" data-for="privacy"></div>
 
-      <div style="display:flex;justify-content:center;margin-top:10px;">
+      <div style="text-align:center;margin-top:12px;">
         <button class="btn btn--primary" type="submit">
           <i class="fa-solid fa-paper-plane"></i> 提交留言
         </button>
       </div>
 
-      <p class="form__hint" style="text-align:center;margin-top:10px;">
-        <i class="fa-solid fa-lock"></i> 本站为静态展示页面：按钮用于演示界面与校验效果。
+      <p class="form__hint" style="text-align:center;">
+        本站为静态页面：提交仅演示效果。
       </p>
     </form>
   </section>
 </main>
 
 <footer>
-  <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+  <p>© 2025 HDU-Lolita爱好站</p>
 </footer>
 
-
-
+<script>
+  // JS 只做“演示提交成功”，校验交给浏览器
+  document.getElementById("messageForm").addEventListener("submit", function(e){
+    // 如果浏览器校验没通过，这里不会执行（因为会被阻止并提示）
+    e.preventDefault();
+    alert("提交成功（演示）✅");
+    this.reset();
+  });
+</script>
 </body>
 </html>
