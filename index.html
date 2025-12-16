@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HDU-Lolita爱好站</title>
 
+    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <!-- 图标字体 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 主样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+<!-- 顶部导航 -->
 <header class="header">
     <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
     <nav>
         <ul>
-            <li><a class="active" href="index.html">首页</a></li>
+            <li><a href="index.html" class="active">首页</a></li>
             <li><a href="about.html">关于Lolita</a></li>
             <li><a href="sales.html">贩售信息</a></li>
             <li><a href="message.html">留言区</a></li>
@@ -23,88 +30,52 @@
     </nav>
 </header>
 
-<section class="page-hero">
-    <div class="page-hero__inner">
-        <h1><i class="fa-solid fa-bow-ribbon"></i> HDU-Lolita爱好站</h1>
-        <p>这里收集 Lolita 文化科普、穿搭灵感与新品贩售节点，让“心动”不再错过 🎀</p>
-    </div>
+<!-- Banner -->
+<section class="banner">
+    <img src="images/banner.jpg" alt="Lolita文化Banner">
+    <h2>欢迎来到杭电Lolita服饰文化站 🎀</h2>
+</section>
 
-    <div class="hero-media">
-        <img src="images/banner.jpg" alt="Lolita文化Banner">
-        <div class="hero-media__overlay"></div>
-        <div class="hero-media__content">
-            <div>
-                <p class="hero-media__title">欢迎来到杭电 Lolita 服饰文化站</p>
-                <p class="hero-media__subtitle muted">从入门到进阶，和大家一起把可爱穿在身上 ✨</p>
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                <a class="btn btn--primary btn--sm" href="sales.html"><i class="fa-solid fa-tags"></i> 看贩售信息</a>
-                <a class="btn btn--ghost btn--sm" href="about.html"><i class="fa-solid fa-book"></i> 了解 Lolita</a>
-            </div>
+<!-- 模块1：贩售信息 -->
+<section class="section sales-section">
+    <h3><i class="fa-solid fa-star"></i> 最新贩售信息</h3>
+
+    <div class="sales-container">
+        <div class="card">
+            <img src="images/sample-dress.jpg" alt="示例图">
+            <p><strong>奥尔奇物商店 OP</strong></p>
+            <p>品牌：仲夏物语</p>
+            <p>状态：已结束</p>
+        </div>
+
+        <div class="card">
+            <img src="images/outfit3.jpg" alt="示例图">
+            <p><strong>晚餐会 JSK</strong></p>
+            <p>品牌：玻璃纸之夜</p>
+            <p>状态：定金中</p>
         </div>
     </div>
 </section>
 
-<main class="container">
+<!-- 模块2：穿搭分享（Grid） -->
+<section class="section outfits-section">
+    <h3><i class="fa-solid fa-heart"></i> 穿搭分享</h3>
 
-    <section class="panel">
-        <div class="section-head">
-            <h3><i class="fa-solid fa-star"></i> 最新贩售信息</h3>
-            <a class="btn btn--ghost btn--sm" href="sales.html"><i class="fa-solid fa-arrow-right"></i> 全部</a>
+    <div class="outfits-grid">
+        <div class="outfit-item">
+            <img src="images/outfit1.jpg" alt="">
+            <p>@Yue · Dreamy Dessert</p>
         </div>
-
-        <div class="sales-container">
-            <div class="card">
-                <img src="images/sample-dress.jpg" alt="示例图">
-                <p><strong>Starlight Waltz JSK</strong></p>
-                <p>品牌：BTSSB</p>
-                <p><span class="status status--deposit">定金中</span></p>
-                <a class="btn btn--primary btn--sm" href="sales-detail.html?id=starlight-waltz">查看详情</a>
-            </div>
-
-            <div class="card">
-                <img src="images/sample-dress.jpg" alt="示例图">
-                <p><strong>奥尔奇物商店 OP</strong></p>
-                <p>品牌：仲夏物语</p>
-                <p><span class="status status--ended">已结束</span></p>
-                <a class="btn btn--ghost btn--sm" href="sales.html">去列表</a>
-            </div>
-
-            <div class="card">
-                <img src="images/outfit3.jpg" alt="示例图">
-                <p><strong>晚餐会 JSK</strong></p>
-                <p>品牌：玻璃纸之夜</p>
-                <p><span class="status status--deposit">定金中</span></p>
-                <a class="btn btn--primary btn--sm" href="sales-detail.html?id=dreamy-dessert">查看详情</a>
-            </div>
+        <div class="outfit-item">
+            <img src="images/outfit2.jpg" alt="">
+            <p>@Luna · Classic Melody</p>
         </div>
-    </section>
-
-    <section class="panel panel--soft" style="margin-top:16px;">
-        <div class="section-head">
-            <h3><i class="fa-solid fa-camera-retro"></i> 穿搭墙</h3>
-            <a class="btn btn--ghost btn--sm" href="message.html"><i class="fa-solid fa-comment-dots"></i> 分享/留言</a>
+        <div class="outfit-item">
+            <img src="images/outfit3.jpg" alt="">
+            <p>@Mina · Rose Ballet</p>
         </div>
-
-        <p class="muted" style="margin-top:0;">记录大家的日常搭配灵感（静态展示，可继续添加更多穿搭卡片）。</p>
-
-        <div class="outfit-gallery">
-            <div class="outfit-item">
-                <img src="images/outfit1.jpg" alt="">
-                <p>@Yue · Classic Day</p>
-            </div>
-            <div class="outfit-item">
-                <img src="images/outfit2.jpg" alt="">
-                <p>@Luna · Sweet Star</p>
-            </div>
-            <div class="outfit-item">
-                <img src="images/outfit3.jpg" alt="">
-                <p>@Mina · Rose Ballet</p>
-            </div>
-        </div>
-    </section>
-
-</main>
+    </div>
+</section>
 
 <footer>
     <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
