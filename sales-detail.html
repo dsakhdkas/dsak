@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starlight Waltz JSK - 详情页</title>
+    <title>商品详情 - HDU-Lolita爱好站</title>
 
     <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
@@ -28,58 +28,52 @@
 <section class="page-hero">
     <div class="page-hero__inner">
         <h1><i class="fa-solid fa-gem"></i> 商品详情</h1>
-        <p>主裙信息、时间节点与小科普，一页看全～</p>
+        <p id="heroSub">主裙信息、时间节点与小科普，一页看全～</p>
     </div>
 </section>
 
 <main class="container">
     <section class="detail">
         <div class="detail__media">
-            <img src="images/sample-dress.jpg" alt="Starlight Waltz JSK">
+            <img id="pImage" src="images/sample-dress.jpg" alt="商品图">
             <div class="detail__badges">
-                <span class="status status--deposit">定金中</span>
-                <span class="badge">Classic</span>
+                <span id="pStatus" class="status status--deposit">定金中</span>
+                <span id="pStyle" class="badge">Classic</span>
             </div>
         </div>
 
         <div class="detail__info panel">
             <div class="detail__head">
-                <h2 class="detail__title">Starlight Waltz JSK</h2>
-                <div class="detail__price">￥899</div>
+                <h2 id="pName" class="detail__title">加载中...</h2>
+                <div id="pPrice" class="detail__price">￥-</div>
             </div>
 
             <div class="kv">
                 <div class="kv__row">
                     <div class="kv__k"><i class="fa-solid fa-store"></i> 品牌</div>
-                    <div class="kv__v">Baby, The Stars Shine Bright</div>
+                    <div id="pBrand" class="kv__v">-</div>
                 </div>
                 <div class="kv__row">
                     <div class="kv__k"><i class="fa-solid fa-palette"></i> 风格</div>
-                    <div class="kv__v">Classic</div>
+                    <div id="pStyle2" class="kv__v">-</div>
                 </div>
                 <div class="kv__row">
                     <div class="kv__k"><i class="fa-solid fa-calendar-days"></i> 定金时间</div>
-                    <div class="kv__v">2025/10/20 - 2025/10/25</div>
+                    <div id="pDeposit" class="kv__v">-</div>
                 </div>
                 <div class="kv__row">
                     <div class="kv__k"><i class="fa-solid fa-clock"></i> 尾款时间</div>
-                    <div class="kv__v">2025/11/05</div>
+                    <div id="pFinal" class="kv__v">-</div>
                 </div>
             </div>
 
             <div class="divider"></div>
 
             <h3 class="subhead"><i class="fa-solid fa-feather"></i> 简介</h3>
-            <p class="muted" style="margin-top:8px;">
-                以星光与华尔兹为主题的梦幻系列，使用银丝织纹与细腻蕾丝，体现典雅气质。
-            </p>
+            <p id="pDesc" class="muted" style="margin-top:8px;">-</p>
 
             <h3 class="subhead"><i class="fa-solid fa-shirt"></i> 搭配建议</h3>
-            <ul class="tips" style="margin-top:8px;">
-                <li>衬衫：奶白/象牙白蕾丝领口更显古典。</li>
-                <li>鞋子：棕色玛丽珍或黑色圆头鞋都很稳。</li>
-                <li>头饰：同色系小头花/发带可以增强整体感。</li>
-            </ul>
+            <ul id="pTips" class="tips" style="margin-top:8px;"></ul>
 
             <div class="detail__actions">
                 <a class="btn btn--ghost" href="sales.html"><i class="fa-solid fa-arrow-left"></i> 返回列表</a>
@@ -90,29 +84,89 @@
 
     <section class="section">
         <h3><i class="fa-solid fa-heart"></i> 你可能也喜欢</h3>
-        <div class="sales-container">
-            <div class="card">
-                <img src="images/outfit2.jpg" alt="示例图">
-                <p><strong>Classic Melody OP</strong></p>
-                <p>品牌：示例品牌</p>
-                <p><span class="status status--coming">预告</span></p>
-                <a class="btn btn--primary btn--sm" href="sales.html">去看看</a>
-            </div>
-
-            <div class="card">
-                <img src="images/outfit1.jpg" alt="示例图">
-                <p><strong>Rose Ballet SK</strong></p>
-                <p>品牌：示例品牌</p>
-                <p><span class="status status--ended">已结束</span></p>
-                <a class="btn btn--primary btn--sm" href="sales.html">去看看</a>
-            </div>
-        </div>
+        <div id="pRecommend" class="sales-container"></div>
     </section>
 </main>
 
 <footer>
     <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
 </footer>
+
+<script src="products.js"></script>
+<script>
+(function(){
+  function qs(name){
+    var sp = new URLSearchParams(location.search);
+    return sp.get(name);
+  }
+
+  function esc(s){
+    return String(s ?? "").replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);
+    });
+  }
+
+  var id = qs("id") || "starlight-waltz";
+  var p = window.getProductById ? window.getProductById(id) : null;
+
+  // fallback: 如果 id 不存在，展示第一条
+  if(!p && window.PRODUCTS && window.PRODUCTS.length) p = window.PRODUCTS[0];
+
+  if(!p){
+    document.getElementById("pName").textContent = "未找到该商品";
+    document.getElementById("pDesc").textContent = "请返回列表页重新选择。";
+    return;
+  }
+
+  var st = window.getStatusLabel(p.status);
+  document.title = p.name + " - 详情页";
+  document.getElementById("heroSub").textContent = "正在查看：" + p.name;
+
+  document.getElementById("pImage").src = p.image;
+  document.getElementById("pImage").alt = p.name;
+
+  var statusEl = document.getElementById("pStatus");
+  statusEl.textContent = st.text;
+  statusEl.className = "status " + st.cls;
+
+  document.getElementById("pStyle").textContent = p.style;
+  document.getElementById("pName").textContent = p.name;
+  document.getElementById("pPrice").textContent = "￥" + p.price;
+
+  document.getElementById("pBrand").textContent = p.brand;
+  document.getElementById("pStyle2").textContent = p.style;
+  document.getElementById("pDeposit").textContent = p.deposit;
+  document.getElementById("pFinal").textContent = p.finalPay;
+  document.getElementById("pDesc").textContent = p.desc;
+
+  var tips = document.getElementById("pTips");
+  tips.innerHTML = "";
+  (p.tips || []).forEach(function(t){
+    var li = document.createElement("li");
+    li.textContent = t;
+    tips.appendChild(li);
+  });
+
+  // recommend cards
+  var recWrap = document.getElementById("pRecommend");
+  recWrap.innerHTML = "";
+  (p.recommend || []).slice(0, 4).forEach(function(rid){
+    var rp = window.getProductById(rid);
+    if(!rp) return;
+    var rst = window.getStatusLabel(rp.status);
+
+    var card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = ''
+      + '<img src="'+esc(rp.image)+'" alt="'+esc(rp.name)+'">'
+      + '<p><strong>'+esc(rp.name)+'</strong></p>'
+      + '<p>品牌：'+esc(rp.brand)+'</p>'
+      + '<p><span class="status '+esc(rst.cls)+'">'+esc(rst.text)+'</span></p>'
+      + '<a class="btn btn--primary btn--sm" href="sales-detail.html?id='+encodeURIComponent(rp.id)+'">查看详情</a>';
+    recWrap.appendChild(card);
+  });
+})();
+</script>
 
 </body>
 </html>
