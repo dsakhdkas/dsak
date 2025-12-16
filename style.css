@@ -99,6 +99,9 @@ nav ul li a.active{
   color: #fff;
 }
 
+h3 { 
+  text-align: center; 
+}
 /* =========================
    Hero
 ========================= */
@@ -160,6 +163,8 @@ nav ul li a.active{
   font-size: 18px;
   max-width: 70%;
 }
+
+
 
 /* 如果你 banner 里用了 <a class="btn">，仍然可用 */
 .banner .btn{
