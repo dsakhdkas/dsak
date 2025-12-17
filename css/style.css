@@ -176,8 +176,6 @@ h3 {
 }
 
 
-
-/* 如果你 banner 里用了 <a class="btn">，仍然可用 */
 .banner .btn{
   position: absolute;
   top: 70%;
@@ -221,7 +219,6 @@ h3 {
   padding-left: 10px;
 }
 
-/* 常用网格 */
 .grid-2{
   display: grid;
   grid-template-columns: 1.25fr .85fr;
@@ -235,9 +232,6 @@ h3 {
 
 .stack{ display: grid; gap: 14px; }
 
-/* =========================
-   Buttons (统一替代 card a / back-btn 等)
-========================= */
 
 .btn{
   display: inline-flex;
@@ -280,10 +274,6 @@ h3 {
   padding: 8px 10px;
   border-radius: 10px;
 }
-
-/* =========================
-   Cards / Galleries
-========================= */
 
 .sales-container,
 .outfit-gallery{
@@ -329,7 +319,6 @@ h3 {
   object-fit: cover;
 }
 
-/* 穿搭分享区域的 Grid 容器，居中横向排列 */
 .outfits-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));

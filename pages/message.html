@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="./style.css?v=1">
+  <link rel="stylesheet" href="./css/style.css?v=1">
 </head>
 
 <body>
@@ -16,9 +16,9 @@
   <nav>
     <ul>
       <li><a href="index.html">首页</a></li>
-      <li><a href="about.html">关于Lolita</a></li>
-      <li><a href="sales.html">贩售信息</a></li>
-      <li><a class="active" href="message.html">留言区</a></li>
+      <li><a href="pages/about.html">关于Lolita</a></li>
+      <li><a href="pages/sales.html">贩售信息</a></li>
+      <li><a class="active" href="pages/message.html">留言区</a></li>
       <li><span id="authSlot"></span></li>
     </ul>
   </nav>
@@ -34,7 +34,6 @@
 <main class="container">
   <section class="panel">
     <h2 class="panel__title" style="text-align:center;margin:0 0 8px;">写一条留言</h2>
-    <!-- 不加 novalidate：让浏览器自己提示 -->
     <form id="messageForm">
       <div class="form__row">
         <label class="form__label">昵称 <span class="req">*</span></label>
@@ -87,14 +86,12 @@
 </footer>
 
 <script>
-  // JS 只做“演示提交成功”，校验交给浏览器
   document.getElementById("messageForm").addEventListener("submit", function(e){
-    // 如果浏览器校验没通过，这里不会执行（因为会被阻止并提示）
     e.preventDefault();
     alert("提交成功（演示）✅");
     this.reset();
   });
 </script>
-<script src="auth.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

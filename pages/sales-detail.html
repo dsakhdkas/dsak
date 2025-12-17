@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品详情 - HDU-Lolita爱好站</title>
 
-    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 主样式 -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -19,8 +16,8 @@
     <nav>
         <ul>
             <li><a href="index.html">首页</a></li>
-            <li><a href="sales.html" class="active">贩售信息</a></li>
-            <li><a href="message.html">留言区</a></li>
+            <li><a href="pages/sales.html" class="active">贩售信息</a></li>
+            <li><a href="pages/message.html">留言区</a></li>
             <li><span id="authSlot"></span></li>
         </ul>
     </nav>
@@ -110,7 +107,6 @@
   var id = qs("id") || "starlight-waltz";
   var p = window.getProductById ? window.getProductById(id) : null;
 
-  // fallback: 如果 id 不存在，展示第一条
   if(!p && window.PRODUCTS && window.PRODUCTS.length) p = window.PRODUCTS[0];
 
   if(!p){
@@ -169,7 +165,7 @@
 })();
 </script>
 
-<script src="auth.js"></script>
+    <script src="js/auth.js"></script>
 
 </body>
 </html>
