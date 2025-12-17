@@ -8,7 +8,7 @@ window.PRODUCTS = [
     price: 499,
     deposit: "2025/10/20 - 2025/10/25",
     finalPay: "2025/11/05",
-    image: "images/sample-dress.jpg",
+    image: "../images/sample-dress.jpg",
     desc: "当猫头鹰的羽翼轻抚过夜色，散落的星光便在此化为真实的藏品",
     tips: [
       "鞋子：棕色玛丽珍或黑色圆头鞋都很稳。",
@@ -25,7 +25,7 @@ window.PRODUCTS = [
     price: 399,
     deposit: "2025/03/01 - 2025/03/05",
     finalPay: "2025/03/18",
-    image: "images/outfit3.jpg",
+    image: "../images/outfit3.jpg",
     desc: "长桌上餐品准备完毕，晚餐会即将开始",
     tips: [
       "衬衫：生产色点纱内搭",
@@ -43,7 +43,7 @@ window.PRODUCTS = [
     price: 799,
     deposit: "2026/01/10 - 2026/01/15",
     finalPay: "2026/01/28",
-    image: "images/outfit2.jpg",
+    image: "../images/outfit2.jpg",
     desc: "古典旋律主题 OP，线条利落，适合日常优雅通勤。",
     tips: [
       "外套：短斗篷或小披肩很搭。",
@@ -61,7 +61,7 @@ window.PRODUCTS = [
     price: 699,
     deposit: "2025/08/02 - 2025/08/06",
     finalPay: "2025/08/20",
-    image: "images/outfit1.jpg",
+    image: "../images/outfit1.jpg",
     desc: "玫瑰芭蕾半裙，适合搭配纯色上衣与玫瑰系配件。",
     tips: [
       "上衣：白色方领或小高领都不错。",
