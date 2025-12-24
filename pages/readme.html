@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README - HDU-Lolita爱好站</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
+    <nav>
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="about.html">关于Lolita</a></li>
+            <li><a href="sales.html">贩售信息</a></li>
+            <li><a href="message.html">留言区</a></li>
+            <li><a href="readme.html" class="active">README</a></li>
+            <li><span id="authSlot"></span></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <div class="page-hero__inner">
+        <h1><i class="fa-solid fa-file-lines"></i> 项目 README</h1>
+        <p>查看本站的立项报告与说明文档</p>
+    </div>
+</section>
+
+<main class="container">
+    <section class="panel">
+        <h2 class="panel__title" style="margin-top:0;">
+            <i class="fa-solid fa-book-open"></i> README.md 内容
+        </h2>
+        <p class="muted">下方内容从项目根目录的 README.md 动态加载，仅供查看。</p>
+        <pre id="readmeContent" style="white-space:pre-wrap; background:#faf7fb; padding:16px; border-radius:8px; border:1px solid rgba(0,0,0,0.05); max-height:70vh; overflow:auto; font-size:14px;"></pre>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+</footer>
+
+<script src="../js/readme.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>
