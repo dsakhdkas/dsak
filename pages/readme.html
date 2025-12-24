@@ -37,8 +37,8 @@
         <h2 class="panel__title" style="margin-top:0;">
             <i class="fa-solid fa-book-open"></i> README.md 内容
         </h2>
-        <p class="muted">下方内容从项目根目录的 README.md 动态加载，仅供查看。</p>
-        <pre id="readmeContent" style="white-space:pre-wrap; background:#faf7fb; padding:16px; border-radius:8px; border:1px solid rgba(0,0,0,0.05); max-height:70vh; overflow:auto; font-size:14px;"></pre>
+        <p class="muted">下方内容从项目根目录的 README.md 动态加载，并使用 Markdown 渲染。</p>
+        <div id="readmeContent" style="background:#faf7fb; padding:16px; border-radius:8px; border:1px solid rgba(0,0,0,0.05); max-height:70vh; overflow:auto; font-size:14px; line-height:1.7;"></div>
     </section>
 </main>
 
@@ -46,6 +46,7 @@
     <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="../js/readme.js"></script>
 <script src="../js/auth.js"></script>
 </body>

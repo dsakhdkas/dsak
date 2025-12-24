@@ -8,7 +8,19 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.text();
     })
     .then(function (text) {
-      el.textContent = text;
+      try {
+        if (window.marked && typeof window.marked.parse === "function") {
+          el.innerHTML = window.marked.parse(text);
+        } else if (window.marked && typeof window.marked === "function") {
+          // 兼容旧版 marked
+          el.innerHTML = window.marked(text);
+        } else {
+          // 兜底：如果没有加载到 marked，就按纯文本显示
+          el.textContent = text;
+        }
+      } catch (e) {
+        el.textContent = text;
+      }
     })
     .catch(function () {
       el.textContent = "README 加载失败，请稍后重试。";
