@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var el = document.getElementById("readmeContent");
-  if (!el) return;
+function loadMarkdownInto(el, url){
+  if (!el || !url) return;
 
-  fetch("../README.md?ts=" + Date.now())
+  fetch(url + (url.indexOf("?") === -1 ? "?ts=" : "&ts=") + Date.now())
     .then(function (res) {
       if (!res.ok) throw new Error("网络错误");
       return res.text();
@@ -23,6 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     })
     .catch(function () {
-      el.textContent = "README 加载失败，请稍后重试。";
+      el.textContent = "内容加载失败，请稍后重试。";
     });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  var el = document.getElementById("readmeContent");
+  if (!el) return;
+
+  loadMarkdownInto(el, "../README.md");
 });
