@@ -1,179 +1,324 @@
-# HDU-Lolita爱好站 · JavaScript 技术说明
+﻿# HDU-Lolita爱好站  JavaScript 技术说明与小结
 
-本文说明本项目中使用到的主要 JavaScript 功能模块与实现思路，包括数据管理、登录昵称演示、README 渲染等。
-
----
-
-## 1. 脚本文件概览
-
-目前项目主要包含以下 JS 文件：
-
-- `js/auth.js`：负责导航栏右侧的昵称登录/登出演示。
-- `js/products.js`：集中管理示例贩售商品数据与状态标签工具函数。
-- `js/readme.js`：负责加载根目录下的 `README.md` 并在 README 页面中进行 Markdown 渲染。
+本文档总结本项目中使用的 JavaScript 技术，适合作为前端入门项目的学习参考。
 
 ---
 
-## 2. 登录昵称演示逻辑（auth.js）
+## 一、项目中的 JS 文件
 
-### 2.1 模块结构
+本项目包含两个主要的 JavaScript 文件：
 
-`auth.js` 使用了一个自执行匿名函数：
+| 文件 | 功能 |
+|------|------|
+| `js/auth.js` | 实现导航栏的登录/登出功能 |
+| `js/products.js` | 管理商品数据和提供工具函数 |
 
-```js
-(function () {
-  // 内部变量与函数
-})();
+---
+
+## 二、核心技术点
+
+### 2.1 DOM 操作
+
+**什么是 DOM？**
+
+DOM（Document Object Model）是浏览器把 HTML 页面解析成的树形结构，JavaScript 可以通过 DOM 来读取和修改页面内容。
+
+**项目中的使用：**
+
+```javascript
+// 通过 id 获取元素
+var el = document.getElementById("authSlot");
+
+// 修改元素的 HTML 内容
+el.innerHTML = '<button>登录</button>';
+
+// 修改元素的纯文本内容
+el.textContent = "你好";
 ```
 
-好处：
+### 2.2 事件监听
 
-- 避免将内部变量泄漏到全局作用域，减少命名冲突。
+**什么是事件？**
 
-### 2.2 本地存储键与渲染函数
+用户在页面上的操作（如点击、输入）会触发事件，我们可以用 JavaScript 监听这些事件并做出响应。
 
-- 通过常量 `KEY = "lolita_username"` 定义 localStorage 中存储昵称的键名。
-- `render()` 函数负责根据当前登录状态更新导航栏右侧的内容：
-  - 通过 `document.getElementById("authSlot")` 获取占位容器。
-  - 使用 `localStorage.getItem(KEY)` 读取昵称。
+**项目中的使用：**
 
-### 2.3 登录 / 登出交互
+```javascript
+// 页面加载完成后执行
+document.addEventListener("DOMContentLoaded", function() {
+    // 这里的代码会在页面加载完成后运行
+});
 
-- 未登录时：
-  - 在 `authSlot` 中插入一个“登录”按钮。
-  - 绑定点击事件：
-    - 使用 `prompt("请输入昵称：")` 请求用户输入。
-    - 去除前后空格后，如果不为空，则 `localStorage.setItem(KEY, v)` 保存昵称，并重新调用 `render()` 刷新导航栏。
-- 已登录时：
-  - 在 `authSlot` 中展示 `@昵称` 和一个“登出”按钮。
-  - 点击“登出”后，通过 `localStorage.removeItem(KEY)` 清除本地昵称，再次调用 `render()` 恢复为未登录状态。
+// 按钮点击事件
+button.onclick = function() {
+    alert("你点击了按钮");
+};
+```
 
-### 2.4 事件绑定时机
+### 2.3 本地存储（localStorage）
 
-- 使用 `document.addEventListener("DOMContentLoaded", render);`
-- 确保在 DOM 加载完成后再尝试获取 `authSlot` 元素，避免空引用问题。
+**什么是 localStorage？**
 
-**说明**：
+localStorage 是浏览器提供的本地存储功能，可以在用户电脑上保存数据，关闭浏览器后数据也不会丢失。
 
-该模块仅作“轻量登录”演示，不涉及真实账号体系，也不会与服务器通信。
+**项目中的使用：**
 
----
+```javascript
+// 保存数据
+localStorage.setItem("lolita_username", "小明");
 
-## 3. 商品数据与状态工具（products.js）
+// 读取数据
+var name = localStorage.getItem("lolita_username");
 
-### 3.1 PRODUCTS 数据结构
+// 删除数据
+localStorage.removeItem("lolita_username");
+```
 
-- 通过 `window.PRODUCTS = [ ... ]` 在全局定义一个商品数组，每个元素为一个对象，字段包括：
-  - `id`：唯一标识字符串（如 `"starlight-waltz"`）。
-  - `name`：系列名称。
-  - `brand`：品牌名。
-  - `style`：风格标签（如 `Classic`、`Sweet`）。
-  - `status`：销售状态（`deposit` / `ended` / `coming`）。
-  - `price`：价格（示例数值）。
-  - `deposit`、`finalPay`：定金时间与尾款时间。
-  - `image`：图片路径。
-  - `desc`：简介文字。
-  - `tips`：数组，存放搭配建议的多行文案。
-  - `recommend`：数组，存放“你可能也喜欢”的其他商品 id。
+> 注意：localStorage 只能存储字符串，存储对象需要先用 `JSON.stringify()` 转换。
 
-**用途**：
+### 2.4 数组方法
 
-- 为贩售信息列表页与商品详情页提供数据源，展示结构化信息。
+**项目中用到的数组方法：**
 
-### 3.2 获取商品与状态文本
+```javascript
+// find() - 查找符合条件的第一个元素
+var product = PRODUCTS.find(function(p) {
+    return p.id === "starlight-waltz";
+});
 
-- `window.getProductById = function(id){ ... }`
-  - 使用 `Array.prototype.find` 在 `PRODUCTS` 中查找指定 id 的商品对象。
-  - 返回匹配的商品或 `undefined`。
-
-- `window.getStatusLabel = function(status){ ... }`
-  - 根据传入的状态字符串，返回对应标签文案与 CSS 类名：
-    - `deposit` → `{ text: "定金中", cls: "status--deposit" }`
-    - `ended` → `{ text: "已结束", cls: "status--ended" }`
-    - 其他 → `{ text: "预告", cls: "status--coming" }`
-
-**优点**：
-
-- 状态文案与样式类集中在一个函数中管理，当需要调整显示文字或颜色时，只需修改这一处即可。
-
-### 3.3 在页面中的典型用法（示意）
-
-以商品详情页为例（逻辑在 `pages/sales-detail.html` 内联脚本中）：
-
-- 通过 `URLSearchParams` 从 `location.search` 获取 `id`。
-- 调用 `getProductById(id)` 获取对应商品对象。
-- 调用 `getStatusLabel(p.status)` 获取状态文案与类名，并设置到 `.status` 标签上。
-- 遍历 `p.tips` 数组，动态创建 `<li>` 元素，填充搭配建议列表。
-- 遍历 `p.recommend`，再次通过 `getProductById` 获取推荐商品，生成“你可能也喜欢”的卡片。
-
----
-
-## 4. README 加载与 Markdown 渲染（readme.js）
-
-### 4.1 基本流程
-
-`readme.js` 主要负责：
-
-1. 等待 DOM 加载。
-2. 找到 README 容器元素 `#readmeContent`。
-3. 使用 `fetch('../README.md?ts=' + Date.now())` 获取最新的 README 文本。
-4. 调用 `marked` 库将 Markdown 文本转换为 HTML，插入到页面中。
-
-### 4.2 关键代码说明
-
-```js
-document.addEventListener("DOMContentLoaded", function () {
-  var el = document.getElementById("readmeContent");
-  if (!el) return;
-
-  fetch("../README.md?ts=" + Date.now())
-    .then(function (res) {
-      if (!res.ok) throw new Error("网络错误");
-      return res.text();
-    })
-    .then(function (text) {
-      try {
-        if (window.marked && typeof window.marked.parse === "function") {
-          el.innerHTML = window.marked.parse(text);
-        } else if (window.marked && typeof window.marked === "function") {
-          // 兼容旧版 marked
-          el.innerHTML = window.marked(text);
-        } else {
-          el.textContent = text;
-        }
-      } catch (e) {
-        el.textContent = text;
-      }
-    })
-    .catch(function () {
-      el.textContent = "README 加载失败，请稍后重试。";
-    });
+// forEach() - 遍历数组
+tips.forEach(function(tip) {
+    console.log(tip);
 });
 ```
 
-- 使用 `?ts=` + 时间戳 避免部分浏览器的缓存问题，确保看到 README 最新内容。
-- 对 `marked` 的新旧 API 做了兼容处理：
-  - 新版：`marked.parse(text)`。
-  - 旧版：`marked(text)`。
-- 如果渲染过程中出错或未成功加载 `marked`，会回退为 `textContent` 纯文本显示，保证页面不会空白。
+### 2.5 对象的使用
+
+**项目中的商品数据结构：**
+
+```javascript
+var product = {
+    id: "starlight-waltz",
+    name: "奥尔奇物商店 OP",
+    brand: "仲夏物语",
+    price: 499,
+    status: "deposit"
+};
+
+// 访问对象属性
+console.log(product.name);    // "奥尔奇物商店 OP"
+console.log(product["price"]); // 499
+```
 
 ---
 
-## 5. 其他脚本与增强方向
+## 三、auth.js 详解（登录功能）
 
-### 5.1 内联脚本示例
+### 3.1 功能说明
 
-- 在留言页中，使用了简单的内联脚本：
-  - 拦截表单 `submit` 事件，调用 `preventDefault()` 阻止真实提交。
-  - 弹出“提交成功（演示）”的提示，并重置表单。
-- 该部分主要用于演示前端表单交互流程，后续可替换为独立 JS 文件并接入后端。
+这个文件实现了一个简单的"登录"功能：
+- 用户点击"登录"按钮，输入昵称
+- 昵称保存在浏览器的 localStorage 中
+- 页面显示用户昵称和"登出"按钮
+- 点击"登出"清除保存的昵称
 
-### 5.2 可改进方向
+### 3.2 代码结构
 
-- 将页面内联脚本逐步拆分到独立 JS 文件中，进一步清晰模块边界。
-- 增加基础错误提示 UI（而不仅仅是 `alert`），提高用户体验。
-- 补充简单路由或状态管理（例如按状态筛选贩售信息），展示更丰富的前端交互能力。
+```javascript
+(function () {
+    // 存储昵称的键名
+    const KEY = "lolita_username";
+
+    // 渲染函数：根据登录状态显示不同内容
+    function render() {
+        var slot = document.getElementById("authSlot");
+        var name = localStorage.getItem(KEY);
+
+        if (!name) {
+            // 未登录：显示登录按钮
+            slot.innerHTML = '<button>登录</button>';
+        } else {
+            // 已登录：显示昵称和登出按钮
+            slot.innerHTML = '@' + name + ' <button>登出</button>';
+        }
+    }
+
+    // 页面加载完成后执行
+    document.addEventListener("DOMContentLoaded", render);
+})();
+```
+
+### 3.3 技术要点
+
+1. **自执行函数** `(function(){ ... })()`
+   - 作用：把代码包裹起来，避免变量污染全局
+   - 里面定义的变量（如 `KEY`）外部无法访问
+
+2. **prompt() 函数**
+   - 弹出输入框，让用户输入内容
+   - 返回用户输入的字符串，点取消返回 null
+
+3. **字符串的 trim() 方法**
+   - 去除字符串前后的空格
+   - 例如：`"  小明  ".trim()` 返回 `"小明"`
 
 ---
 
-以上为本项目 JavaScript 部分的主要技术说明，涵盖了登录演示、数据管理与 Markdown 渲染等核心逻辑，便于后续复查与扩展。
+## 四、products.js 详解（数据管理）
+
+### 4.1 功能说明
+
+这个文件负责：
+- 存储所有商品的数据（数组形式）
+- 提供根据 id 查找商品的函数
+- 提供获取状态标签的函数
+
+### 4.2 数据结构
+
+```javascript
+window.PRODUCTS = [
+    {
+        id: "starlight-waltz",
+        name: "奥尔奇物商店 OP",
+        brand: "仲夏物语",
+        style: "Classic",
+        status: "deposit",
+        price: 499,
+        deposit: "2025/10/20 - 2025/10/25",
+        finalPay: "2025/11/05",
+        image: "../images/sample-dress.jpg",
+        desc: "当猫头鹰的羽翼轻抚过夜色...",
+        tips: ["鞋子：棕色玛丽珍", "头饰：同色系女巫帽"],
+        recommend: ["classic-melody", "rose-ballet"]
+    },
+    // ... 更多商品
+];
+```
+
+### 4.3 工具函数
+
+```javascript
+// 根据 id 查找商品
+window.getProductById = function(id) {
+    return window.PRODUCTS.find(function(p) {
+        return p.id === id;
+    });
+};
+
+// 获取状态的显示文本和样式类名
+window.getStatusLabel = function(status) {
+    if (status === "deposit") {
+        return { text: "定金中", cls: "status--deposit" };
+    }
+    if (status === "ended") {
+        return { text: "已结束", cls: "status--ended" };
+    }
+    return { text: "预告", cls: "status--coming" };
+};
+```
+
+### 4.4 为什么挂载到 window？
+
+```javascript
+window.PRODUCTS = [...];
+window.getProductById = function() {...};
+```
+
+- `window` 是浏览器的全局对象
+- 挂载到 `window` 上的变量，其他 JS 文件也能访问
+- 这样 `sales-detail.html` 页面就能使用 `products.js` 里的数据和函数
+
+---
+
+## 五、页面内联脚本示例
+
+### 5.1 商品详情页的脚本
+
+在 `sales-detail.html` 中，有一段内联的 JavaScript 代码：
+
+```javascript
+// 从 URL 获取商品 id
+// 例如：sales-detail.html?id=starlight-waltz
+var sp = new URLSearchParams(location.search);
+var id = sp.get("id");
+
+// 查找商品数据
+var product = window.getProductById(id);
+
+// 填充页面内容
+document.getElementById("pName").textContent = product.name;
+document.getElementById("pPrice").textContent = "￥" + product.price;
+```
+
+### 5.2 留言表单的脚本
+
+在 `message.html` 中：
+
+```javascript
+document.getElementById("messageForm").addEventListener("submit", function(e) {
+    e.preventDefault();  // 阻止表单默认提交
+    alert("提交成功（演示）");
+    this.reset();        // 重置表单
+});
+```
+
+---
+
+## 六、常用 JavaScript 技巧总结
+
+### 6.1 字符串拼接
+
+```javascript
+// 方式1：+ 号拼接
+var html = '<p>' + name + '</p>';
+
+// 方式2：模板字符串（ES6，推荐）
+var html = `<p>${name}</p>`;
+```
+
+### 6.2 条件判断简写
+
+```javascript
+// 完整写法
+if (name !== null && name !== undefined && name !== "") {
+    // ...
+}
+
+// 简写（判断是否有值）
+if (name) {
+    // ...
+}
+```
+
+### 6.3 默认值设置
+
+```javascript
+// 如果 id 为空，使用默认值
+var id = sp.get("id") || "starlight-waltz";
+```
+
+---
+
+## 七、小结与收获
+
+通过这个项目，学习和实践了以下 JavaScript 知识：
+
+| 知识点 | 应用场景 |
+|--------|----------|
+| DOM 操作 | 获取元素、修改内容 |
+| 事件监听 | 点击按钮、表单提交、页面加载 |
+| localStorage | 保存用户昵称 |
+| 数组和对象 | 存储和管理商品数据 |
+| 函数封装 | 把重复的逻辑抽成函数复用 |
+| URL 参数获取 | 实现商品详情页的动态加载 |
+
+**不足与改进方向：**
+
+1. 目前数据写死在 JS 文件中，可以改为从 JSON 文件或后端 API 获取
+2. 没有使用模块化（ES6 Module），文件之间通过 `window` 共享数据
+3. 可以学习 Vue/React 等框架，用更现代的方式组织代码
+
+---
+
+以上是本项目 JavaScript 部分的技术说明与小结。
