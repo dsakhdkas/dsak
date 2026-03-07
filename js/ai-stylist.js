@@ -5,7 +5,7 @@
 
 (function () {
   // ⚠️ 部署后请替换为你的 Cloudflare Workers URL
-  const API_URL = "https://hdu-lolita.yue47599.workers.dev//api/stylist";
+  const API_URL = "https://hdu-lolita.yue47599.workers.dev/api/stylist";
 
   const form = document.getElementById("aiForm");
   const submitBtn = document.getElementById("submitBtn");
