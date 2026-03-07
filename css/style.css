@@ -669,3 +669,73 @@ footer{
   .banner h1{ font-size: 30px; }
   .banner p{ max-width: 86%; }
 }
+
+/* =========================
+   AI Stylist Page
+========================= */
+
+.ai-panel {
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.ai-form .form__row {
+  margin-bottom: 14px;
+}
+
+.ai-result {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ai-result__content {
+  line-height: 1.8;
+}
+
+.ai-loading,
+.ai-error {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.ai-loading i,
+.ai-error i {
+  font-size: 2.5rem;
+  color: var(--pink-600);
+  margin-bottom: 16px;
+}
+
+.ai-error i {
+  color: #e57373;
+}
+
+.ai-text {
+  background: var(--pink-50);
+  border-radius: 12px;
+  padding: 20px 24px;
+  border: 1px solid var(--pink-200);
+}
+
+.ai-text h3.ai-heading {
+  color: var(--pink-600);
+  margin: 20px 0 10px;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+.ai-text h3.ai-heading:first-child {
+  margin-top: 0;
+}
+
+.ai-list {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.ai-list li {
+  margin: 4px 0;
+}
+
+.ai-text p {
+  margin: 8px 0;
+}

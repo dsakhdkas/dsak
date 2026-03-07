@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI穿搭推荐 - HDU-Lolita爱好站</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo"><i class="fa-solid fa-ribbon"></i> HDU-Lolita爱好站</div>
+    <nav>
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="about.html">关于Lolita</a></li>
+            <li><a href="sales.html">贩售信息</a></li>
+            <li><a href="ai-stylist.html" class="active">AI穿搭</a></li>
+            <li><a href="message.html">留言区</a></li>
+            <li><a href="../README.md" target="_blank">README</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-hero">
+    <div class="page-hero__inner">
+        <h1><i class="fa-solid fa-wand-magic-sparkles"></i> AI 穿搭推荐</h1>
+        <p>告诉我你的风格偏好，让 AI 为你量身定制 Lolita 穿搭方案 ✨</p>
+    </div>
+</section>
+
+<main class="container">
+    <section class="panel ai-panel">
+        <h2 class="panel__title" style="text-align:center;margin:0 0 16px;">
+            <i class="fa-solid fa-sparkles"></i> 描述你的穿搭需求
+        </h2>
+
+        <form id="aiForm" class="ai-form">
+            <div class="form__row">
+                <label class="form__label">风格偏好 <span class="req">*</span></label>
+                <select class="input" name="style" required>
+                    <option value="">请选择风格</option>
+                    <option value="sweet">Sweet（甜系）</option>
+                    <option value="classic">Classic（古典）</option>
+                    <option value="gothic">Gothic（哥特）</option>
+                    <option value="country">Country（田园）</option>
+                    <option value="hime">Hime（公主）</option>
+                    <option value="casual">Casual Lolita（日常）</option>
+                </select>
+            </div>
+
+            <div class="form__row">
+                <label class="form__label">场合</label>
+                <select class="input" name="occasion">
+                    <option value="">请选择场合（可选）</option>
+                    <option value="daily">日常外出</option>
+                    <option value="tea-party">茶会聚会</option>
+                    <option value="photo">拍照</option>
+                    <option value="concert">音乐会/演出</option>
+                    <option value="date">约会</option>
+                </select>
+            </div>
+
+            <div class="form__row">
+                <label class="form__label">季节</label>
+                <select class="input" name="season">
+                    <option value="">请选择季节（可选）</option>
+                    <option value="spring">春季</option>
+                    <option value="summer">夏季</option>
+                    <option value="autumn">秋季</option>
+                    <option value="winter">冬季</option>
+                </select>
+            </div>
+
+            <div class="form__row">
+                <label class="form__label">颜色偏好</label>
+                <input class="input" name="color" placeholder="如：粉色、黑白、酒红、薄荷绿等">
+            </div>
+
+            <div class="form__row">
+                <label class="form__label">预算范围</label>
+                <select class="input" name="budget">
+                    <option value="">请选择预算（可选）</option>
+                    <option value="low">500元以下</option>
+                    <option value="mid">500-1500元</option>
+                    <option value="high">1500-3000元</option>
+                    <option value="premium">3000元以上</option>
+                </select>
+            </div>
+
+            <div class="form__row">
+                <label class="form__label">其他要求</label>
+                <textarea class="input" name="extra" rows="3" maxlength="200"
+                          placeholder="你可以补充说明任何特殊需求，如：喜欢蕾丝元素、想要显高、适合圆脸等"></textarea>
+            </div>
+
+            <div style="text-align:center;margin-top:16px;">
+                <button class="btn btn--primary" type="submit" id="submitBtn">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> 生成穿搭建议
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <section class="panel ai-result" id="resultPanel" style="display:none;">
+        <h2 class="panel__title" style="text-align:center;margin:0 0 16px;">
+            <i class="fa-solid fa-shirt"></i> AI 穿搭建议
+        </h2>
+        <div id="aiResult" class="ai-result__content">
+            <!-- AI 返回的内容将显示在这里 -->
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 HDU-Lolita爱好站 | <i class="fa-solid fa-envelope"></i> 邮箱：hdu-lolita@xx.edu.cn</p>
+</footer>
+
+<script src="../js/ai-stylist.js"></script>
+</body>
+</html>
