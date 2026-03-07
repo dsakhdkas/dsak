@@ -119,8 +119,8 @@ async function handleStreamRequest(request, env) {
       });
     }
 
-    // 调用 Cloudflare Workers AI（流式）- 使用 Qwen 模型
-    const stream = await env.AI.run("@cf/qwen/qwen1.5-7b-chat-awq", {
+    // 调用 Cloudflare Workers AI（流式）- 使用 Qwen 2.5 模型
+    const stream = await env.AI.run("@cf/qwen/qwen2.5-coder-32b-instruct", {
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
@@ -179,7 +179,7 @@ async function handleStylistRequest(request, env) {
       });
     }
 
-    const aiResponse = await env.AI.run("@cf/qwen/qwen1.5-7b-chat-awq", {
+    const aiResponse = await env.AI.run("@cf/qwen/qwen2.5-coder-32b-instruct", {
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
