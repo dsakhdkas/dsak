@@ -58,7 +58,8 @@
     };
 
     // 构建用户需求描述
-    let prompt = `请为我推荐一套 Lolita 穿搭方案。\n`;
+    let prompt = `请用中文为我推荐一套 Lolita 穿搭方案，按照下面的要求，不要混淆汉元素、JK、普通洋装，注意场景和预算
+避免不协调搭配。\n`;
     prompt += `风格偏好：${styleMap[data.style] || data.style}\n`;
 
     if (data.occasion) {
