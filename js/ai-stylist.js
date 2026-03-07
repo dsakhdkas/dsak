@@ -1,11 +1,11 @@
 /**
  * AI 穿搭推荐 - 前端脚本
- * 收集用户需求并调用 Cloudflare Workers API
+ * 收集用户需求并调用 Cloudflare Workers API（支持流式响应）
  */
 
 (function () {
   // ⚠️ 部署后请替换为你的 Cloudflare Workers URL
-  const API_URL = "https://hdu-lolita.yue47599.workers.dev/api/stylist";
+  const API_URL = "https://hdu-lolita.yue47599.workers.dev/api/stylist/stream";
 
   const form = document.getElementById("aiForm");
   const submitBtn = document.getElementById("submitBtn");
@@ -82,12 +82,10 @@
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> AI 思考中...';
     resultPanel.style.display = "block";
-    aiResult.innerHTML = `
-      <div class="ai-loading">
-        <i class="fa-solid fa-spinner fa-spin"></i>
-        <p>AI 正在为你生成穿搭建议，请稍候...</p>
-      </div>
-    `;
+    aiResult.innerHTML = `<div class="ai-text"><p></p></div>`;
+
+    let fullText = "";
+    const textContainer = aiResult.querySelector("p");
 
     try {
       const response = await fetch(API_URL, {
@@ -102,14 +100,42 @@
         throw new Error(`请求失败: ${response.status}`);
       }
 
-      const result = await response.json();
+      // 流式读取响应
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
 
-      if (result.success && result.data) {
-        // 将 AI 返回的文本转换为 HTML（简单处理换行）
-        const htmlContent = formatAIResponse(result.data);
-        aiResult.innerHTML = htmlContent;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        
+        // 解析 SSE 格式的数据
+        const lines = chunk.split("\n");
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = line.slice(6);
+            if (data === "[DONE]") continue;
+            
+            try {
+              const json = JSON.parse(data);
+              if (json.response) {
+                fullText += json.response;
+                // 实时更新显示（简单格式化）
+                textContainer.innerHTML = formatAIResponseLive(fullText);
+              }
+            } catch (e) {
+              // 忽略解析错误
+            }
+          }
+        }
+      }
+
+      // 最终格式化
+      if (fullText) {
+        aiResult.innerHTML = formatAIResponse(fullText);
       } else {
-        throw new Error(result.error || "未知错误");
+        throw new Error("AI 未返回内容");
       }
     } catch (err) {
       console.error("AI 请求失败:", err);
@@ -128,6 +154,17 @@
       submitBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> 生成穿搭建议';
     }
   });
+
+  /**
+   * 实时格式化（简单处理，保持流畅）
+   */
+  function formatAIResponseLive(text) {
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\n/g, "<br>");
+  }
 
   /**
    * 格式化 AI 返回的文本为 HTML

@@ -1,7 +1,7 @@
 /**
  * HDU-Lolita AI 穿搭推荐 - Cloudflare Workers
  * 
- * 使用 Cloudflare Workers AI 生成 Lolita 穿搭建议
+ * 使用 Cloudflare Workers AI 生成 Lolita 穿搭建议（支持流式响应）
  * 
  * 部署步骤：
  * 1. 登录 Cloudflare Dashboard (https://dash.cloudflare.com)
@@ -24,7 +24,12 @@ export default {
 
     const url = new URL(request.url);
 
-    // API 路由
+    // 流式 API 路由
+    if (url.pathname === "/api/stylist/stream" && request.method === "POST") {
+      return handleStreamRequest(request, env);
+    }
+
+    // 普通 API 路由（保留兼容）
     if (url.pathname === "/api/stylist" && request.method === "POST") {
       return handleStylistRequest(request, env);
     }
@@ -33,7 +38,8 @@ export default {
     return new Response(JSON.stringify({ 
       message: "HDU-Lolita AI Stylist API",
       endpoints: {
-        "POST /api/stylist": "生成穿搭建议"
+        "POST /api/stylist": "生成穿搭建议",
+        "POST /api/stylist/stream": "流式生成穿搭建议"
       }
     }), {
       headers: { 
@@ -57,23 +63,8 @@ function handleCORS() {
   });
 }
 
-async function handleStylistRequest(request, env) {
-  try {
-    const body = await request.json();
-    const userPrompt = body.prompt;
-
-    if (!userPrompt) {
-      return new Response(JSON.stringify({ 
-        success: false, 
-        error: "缺少 prompt 参数" 
-      }), {
-        status: 400,
-        headers: { "Content-Type": "application/json", ...corsHeaders }
-      });
-    }
-
-    // 系统提示词 - 定义 AI 角色
-    const systemPrompt = `你是一位专业的 Lolita 时尚穿搭顾问，精通各种 Lolita 风格（Sweet、Classic、Gothic、Country、Hime、Casual Lolita 等）。
+// 系统提示词
+const systemPrompt = `你是一位专业的 Lolita 时尚穿搭顾问，精通各种 Lolita 风格（Sweet、Classic、Gothic、Country、Hime、Casual Lolita 等）。
 
 你的任务是根据用户的需求，提供详细、专业且实用的 Lolita 穿搭建议。
 
@@ -99,16 +90,78 @@ async function handleStylistRequest(request, env) {
 ## 穿搭小贴士
 1-2条实用建议
 
-请用亲切、专业的语气回复，适当使用 emoji 增加趣味性。回复控制在 400-600 字左右。`;
+请用亲切、专业的语气回复，适当使用 emoji 增加趣味性。回复控制在 300-400 字左右。`;
 
-    // 调用 Cloudflare Workers AI
-    // 使用 Llama 3 或其他可用模型
-    const aiResponse = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
+// 流式响应处理
+async function handleStreamRequest(request, env) {
+  try {
+    const body = await request.json();
+    const userPrompt = body.prompt;
+
+    if (!userPrompt) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "缺少 prompt 参数" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    // 调用 Cloudflare Workers AI（流式）- 使用 Qwen 模型
+    const stream = await env.AI.run("@cf/qwen/qwen1.5-14b-chat-awq", {
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
       ],
-      max_tokens: 1024,
+      max_tokens: 800,
+      temperature: 0.7,
+      stream: true,
+    });
+
+    // 返回流式响应
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        ...corsHeaders
+      }
+    });
+
+  } catch (err) {
+    console.error("AI 流式调用失败:", err);
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: err.message || "AI 服务错误" 
+    }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }
+}
+
+// 普通响应处理（兼容旧版）
+async function handleStylistRequest(request, env) {
+  try {
+    const body = await request.json();
+    const userPrompt = body.prompt;
+
+    if (!userPrompt) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "缺少 prompt 参数" 
+      }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
+    const aiResponse = await env.AI.run("@cf/qwen/qwen1.5-14b-chat-awq", {
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt }
+      ],
+      max_tokens: 800,
       temperature: 0.7,
     });
 
