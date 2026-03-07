@@ -95,6 +95,17 @@ const systemPrompt = `你是一位专业的 Lolita 时尚穿搭顾问，精通�
 // 流式响应处理
 async function handleStreamRequest(request, env) {
   try {
+    // 检查 AI binding 是否存在
+    if (!env.AI) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "AI binding 未配置，请在 Worker Settings -> Variables -> AI Bindings 中添加变量名 AI" 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
     const body = await request.json();
     const userPrompt = body.prompt;
 
@@ -109,7 +120,7 @@ async function handleStreamRequest(request, env) {
     }
 
     // 调用 Cloudflare Workers AI（流式）- 使用 Qwen 模型
-    const stream = await env.AI.run("@cf/qwen/qwen1.5-14b-chat-awq", {
+    const stream = await env.AI.run("@cf/qwen/qwen1.5-7b-chat-awq", {
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
@@ -132,7 +143,8 @@ async function handleStreamRequest(request, env) {
     console.error("AI 流式调用失败:", err);
     return new Response(JSON.stringify({ 
       success: false, 
-      error: err.message || "AI 服务错误" 
+      error: err.message || "AI 服务错误",
+      details: String(err)
     }), {
       status: 500,
       headers: { "Content-Type": "application/json", ...corsHeaders }
@@ -143,6 +155,17 @@ async function handleStreamRequest(request, env) {
 // 普通响应处理（兼容旧版）
 async function handleStylistRequest(request, env) {
   try {
+    // 检查 AI binding 是否存在
+    if (!env.AI) {
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: "AI binding 未配置" 
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+
     const body = await request.json();
     const userPrompt = body.prompt;
 
@@ -156,7 +179,7 @@ async function handleStylistRequest(request, env) {
       });
     }
 
-    const aiResponse = await env.AI.run("@cf/qwen/qwen1.5-14b-chat-awq", {
+    const aiResponse = await env.AI.run("@cf/qwen/qwen1.5-7b-chat-awq", {
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt }
